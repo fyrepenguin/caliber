@@ -1,0 +1,105 @@
+.ca-avatar--container {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: $caliber-ui-rounded-sm;
+  position: relative;
+
+  &.ca-avatar--container-round {
+    border-radius: $caliber-ui-rounded-full;
+  }
+
+  .ca-avatar__text {
+    font-weight: $caliber-ui-font-semibold;
+    text-align: center;
+    text-transform: capitalize;
+    font-size: $caliber-ui-text-xxs;
+    color: $caliber-ui-gray-600;
+
+    &.ca-avatar__text-medium {
+      font-size: $caliber-ui-text-xs;
+    }
+
+    &.ca-avatar__text-large {
+      font-size: $caliber-ui-text-lg;
+    }
+
+    &.ca-avatar__text-xlarge {
+      font-size: $caliber-ui-text-2xl;
+    }
+  }
+
+  .ca-avatar__status {
+    position: absolute;
+    right: 0;
+    top: 0;
+    width: 0.4rem;
+    height: 0.4rem;
+    background-color: white;
+    border: 0.5px solid white;
+    border-radius: $caliber-ui-rounded-full;
+    transform: translateX(-40%);
+
+    &.ca-avatar__status-medium {
+      width: 0.465rem;
+      height: 0.465rem;
+    }
+
+    &.ca-avatar__status-large {
+      width: 0.563rem;
+      height: 0.563rem;
+    }
+
+    &.ca-avatar__status-xlarge {
+      width: 0.75rem;
+      height: 0.75rem;
+      transform: translateX(-65%);
+    }
+
+    &.ca-avatar__status-square {
+      transform: translate(25%, -25%);
+    }
+
+    &.online {
+      background-color: $caliber-ui-success;
+    }
+
+    &.idle {
+      background-color: $caliber-ui-warning;
+    }
+
+    &.offline {
+      background-color: $caliber-ui-gray-300;
+    }
+  }
+
+  .ca-avatar {
+    display: inline-block;
+    border-radius: $caliber-ui-rounded-sm;
+    height: 1.5rem;
+    width: 1.5rem;
+
+    &.hidden {
+      display: none;
+    }
+
+    &.ca-avatar--medium {
+      height: 2rem;
+      width: 2rem;
+    }
+
+    &.ca-avatar--large {
+      height: 2.5rem;
+      width: 2.5rem;
+    }
+
+    &.ca-avatar--xlarge {
+      height: 4rem;
+      width: 4rem;
+    }
+
+    &.ca-avatar--round {
+      border-radius: $caliber-ui-rounded-full;
+    }
+  }
+}

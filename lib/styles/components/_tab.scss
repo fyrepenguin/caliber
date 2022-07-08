@@ -1,0 +1,78 @@
+.ca-tab__wrapper {
+  width: 100%;
+  border-bottom: 1px solid $caliber-ui-gray-300;
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-start;
+  align-items: center;
+
+  &--size-large {
+    .ca-tab {
+      font-size: $caliber-ui-text-xl;
+      padding-left: 12px;
+      padding-right: 12px;
+    }
+  }
+  &--underline-none {
+    border-bottom: none;
+    .ca-tab {
+      &::before {
+        display: none;
+      }
+    }
+  }
+}
+
+.ca-tab {
+  color: $caliber-ui-gray-500;
+  font-weight: $caliber-ui-font-semibold;
+  font-size: $caliber-ui-text-sm;
+  line-height: 1;
+  padding: 12px 8px;
+  transition: $caliber-ui-transition;
+  position: relative;
+  cursor: pointer;
+  text-decoration: none;
+  outline: none;
+
+  &:hover,
+  &:focus,
+  &:focus-visible,
+  &:active {
+    text-decoration: none;
+    outline: none;
+  }
+
+  &__icon {
+    margin-right: 12px;
+  }
+
+  svg {
+    width: 16px;
+    height: 16px;
+  }
+
+  &:hover {
+    color: $caliber-ui-gray-600;
+  }
+
+  &:before {
+    content: "";
+    position: absolute;
+    width: 100%;
+    height: 1px;
+    background-color: transparent;
+    left: 0;
+    right: 0;
+    bottom: -1px;
+    transition: $caliber-ui-transition;
+  }
+
+  &.active {
+    color: $caliber-ui-gray-800;
+
+    &:before {
+      background-color: $caliber-ui-gray-800;
+    }
+  }
+}

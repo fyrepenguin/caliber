@@ -1,0 +1,19 @@
+.caliber-editor-loader {
+  width: 100%;
+  height: 32px;
+  display: flex;
+  align-items: center;
+  text-align: center;
+}
+
+.caliber-editor-loader__spinner-icon {
+  width: 16px;
+  height: 16px;
+  display: inline-block;
+  border-radius: $caliber-ui-rounded-full;
+  border: solid 2px $caliber-ui-gray-200;
+  border-top-color: $caliber-ui-gray-800;
+  border-left-color: $caliber-ui-gray-800;
+  animation: spin 600ms linear infinite;
+  margin: 1px auto;
+}

@@ -1,0 +1,160 @@
+.ca-btn {
+  display: inline-flex;
+  align-items: center;
+  font-size: $caliber-ui-text-sm;
+  font-weight: $caliber-ui-font-medium;
+  border-radius: $caliber-ui-rounded-sm;
+  line-height: 1.2;
+  transition: $caliber-ui-transition;
+  border: none;
+  cursor: pointer;
+  padding: 0;
+  user-select: none;
+  padding: 4px 8px;
+  min-height: 28px;
+  letter-spacing: -0.15px;
+  outline: none;
+
+  &--icon-only {
+    padding-left: 6px;
+    padding-right: 6px;
+  }
+
+  &:focus,
+  &:focus-visible {
+    outline: none;
+  }
+
+  &:hover {
+    text-decoration: none;
+  }
+
+  &.disabled {
+    cursor: not-allowed;
+    opacity: 0.4;
+  }
+
+  .ca-btn__icon:last-child:not(:first-child),
+  .ca-btn__spinner:last-child:not(:first-child) {
+    margin-left: 8px;
+  }
+}
+
+.ca-btn--icon-left {
+  flex-direction: row-reverse;
+  .ca-btn__icon:last-child:not(:first-child),
+  .ca-btn__spinner:last-child:not(:first-child) {
+    margin-right: 8px;
+    margin-left: 0;
+  }
+}
+
+.ca-btn__icon,
+.ca-btn__spinner,
+.ca-btn__spinner-wrapper {
+  color: inherit;
+  svg {
+    color: inherit !important;
+  }
+}
+
+// width
+.ca-btn--width-full {
+  width: 100% !important;
+  justify-content: center;
+}
+
+// size
+.ca-btn--size-large {
+  font-size: $caliber-ui-text-base;
+  padding: 6px 12px;
+  min-height: 32px;
+
+  &.ca-btn--icon-only {
+    padding-left: 8px;
+    padding-right: 8px;
+  }
+}
+
+// styles
+.ca-btn--style {
+  &-primary {
+    color: $caliber-ui-white;
+    background-color: $caliber-ui-gray-800;
+
+    &:hover:not(:disabled),
+    &:active {
+      color: $caliber-ui-white;
+      background-color: $caliber-ui-gray-700;
+    }
+
+    &:focus-visible {
+      color: $caliber-ui-white;
+      box-shadow: 0 0 0 3px #e5e5e5;
+    }
+  }
+
+  &-secondary {
+    color: $caliber-ui-gray-800;
+    background-color: $caliber-ui-gray-200;
+
+    &:hover:not(:disabled),
+    &:active {
+      color: $caliber-ui-gray-800;
+      background-color: $caliber-ui-gray-400;
+    }
+
+    &:focus-visible {
+      color: $caliber-ui-gray-800;
+      box-shadow: 0 0 0 3px #e5e5e5;
+    }
+  }
+
+  &-text {
+    color: $caliber-ui-gray-800;
+
+    &:hover:not(:disabled),
+    &:active {
+      color: $caliber-ui-gray-800;
+      background-color: $caliber-ui-gray-200;
+    }
+
+    &:focus-visible {
+      color: $caliber-ui-gray-800;
+      box-shadow: 0 0 0 3px #e5e5e5;
+    }
+  }
+
+  &-link {
+    color: $caliber-ui-secondary-indigo;
+    min-height: initial;
+    padding: 0;
+
+    &:hover:not(:disabled),
+    &:active,
+    &:focus {
+      opacity: 0.8;
+      color: $caliber-ui-secondary-indigo;
+    }
+
+    &:focus-visible {
+      color: darken($caliber-ui-secondary-indigo, 25%);
+    }
+  }
+
+  &-danger {
+    color: $caliber-ui-error;
+    background-color: $caliber-ui-pastel-red;
+
+    &:hover:not(:disabled),
+    &:active {
+      color: $caliber-ui-error;
+      background-color: darken($caliber-ui-pastel-red, 2.5%);
+    }
+
+    &:focus-visible {
+      color: $caliber-ui-error;
+      box-shadow: 0 0 0 3px darken($caliber-ui-pastel-red, 2.5%);
+    }
+  }
+}

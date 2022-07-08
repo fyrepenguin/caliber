@@ -1,0 +1,48 @@
+@import "./styles/abstracts/caliber-ui-variables";
+@import "./styles/abstracts/normalize";
+@import "./styles/abstracts/mixins";
+@import "./styles/abstracts/animations";
+
+@import "./styles/components/dropdown";
+@import "./styles/components/avatar";
+@import "./styles/components/tab";
+@import "./styles/components/button";
+@import "./styles/components/tooltip";
+@import "./styles/components/input";
+@import "./styles/components/modal";
+@import "./styles/components/loader";
+
+@import "./styles/editor/commands";
+@import "./styles/editor/editor";
+@import "./styles/editor/editor-content";
+@import "./styles/editor/menu";
+@import "./styles/editor/image-uploader";
+@import "./styles/editor/emoji";
+@import "./styles/editor/markdown";
+@import "./styles/editor/image-editor";
+
+body {
+  margin: 0;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto", "Oxygen",
+    "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans", "Helvetica Neue",
+    sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+code {
+  font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New",
+    monospace;
+}
+
+.ProseMirror {
+  @include scrollbars(4px);
+
+  overflow-y: auto;
+  height: 100%;
+  white-space: break-spaces;
+}
+
+.ProseMirror:focus {
+  outline: none;
+}

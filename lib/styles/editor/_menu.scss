@@ -1,0 +1,170 @@
+.caliber-editor-fixed-menu {
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-start;
+  align-items: center;
+  overflow-x: auto;
+  border-radius: $caliber-ui-rounded-sm $caliber-ui-rounded-sm 0px 0px;
+  background-color: $caliber-ui-gray-200;
+  @include scrollbars(4px);
+
+  .caliber-editor-fixed-menu__item {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+
+    padding: 10px;
+    cursor: pointer;
+    transition: $caliber-ui-transition;
+
+    &:hover,
+    &:focus,
+    &:active,
+    &.active {
+      background-color: $caliber-ui-gray-300;
+    }
+
+    input[type="color"] {
+      visibility: hidden;
+      height: 0;
+      width: 0;
+    }
+  }
+
+  .caliber-editor-fixed-menu-addons {
+    display: flex;
+    align-items: center;
+    margin-left: auto;
+  }
+}
+
+.caliber-editor-variables-suggestion {
+  padding: 4px 0;
+}
+
+.caliber-editor-variables-list {
+  padding: 4px 8px;
+  min-width: 184px;
+
+  .caliber-editor-variables-block {
+    &:not(:last-child) {
+      margin-bottom: 12px;
+    }
+
+    h6 {
+      font-size: $caliber-ui-text-xs;
+      font-weight: $caliber-ui-font-medium;
+      color: $caliber-ui-gray-600;
+      margin-bottom: 4px;
+    }
+
+    .caliber-editor-variables-row {
+      display: flex;
+      flex-direction: row;
+      justify-content: flex-start;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 8px;
+
+      .caliber-editor-variable {
+        padding: 4px 6px;
+        font-size: $caliber-ui-text-xs;
+        color: $caliber-ui-gray-700;
+        line-height: 1;
+        background-color: $caliber-ui-pastel-blue;
+        border-radius: $caliber-ui-rounded-sm;
+        transition: $caliber-ui-transition;
+
+        &:hover {
+          background-color: darken($caliber-ui-pastel-blue, 5%);
+        }
+      }
+    }
+  }
+}
+
+.caliber-editor-link-wrapper {
+  .ca-dropdown__popup {
+    padding: 8px;
+    width: 100%;
+    max-width: 400px;
+
+    .caliber-editor-link__item {
+      display: flex !important;
+      flex-direction: row;
+      justify-content: flex-start;
+      align-items: center;
+      gap: 12px;
+    }
+  }
+}
+
+.caliber-editor-font-size-wrapper {
+  .ca-dropdown__popup {
+    display: flex !important;
+    flex-direction: row;
+    justify-content: flex-start;
+    align-items: center;
+    gap: 8px;
+    padding: 4px;
+
+    li {
+      padding: 6px 8px;
+    }
+  }
+}
+
+.caliber-editor-bubble-menu {
+  position: relative;
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-start;
+  align-items: center;
+  overflow: hidden;
+  border-radius: $caliber-ui-rounded;
+  background: $caliber-ui-gray-800;
+
+  .caliber-editor-bubble-menu__item {
+    padding: 8px;
+    cursor: pointer;
+    transition: $caliber-ui-transition;
+
+    &:hover,
+    &:active,
+    &.active {
+      background-color: $caliber-ui-gray-700;
+    }
+  }
+
+  .caliber-editor-bubble-menu__link {
+    display: flex;
+    align-items: center;
+    padding: 8px;
+    gap: 8px;
+
+    .caliber-editor-bubble-menu-link__input {
+      background-color: transparent;
+      outline: none;
+      line-height: 20px;
+
+      &::placeholder {
+        color: rgba($caliber-ui-white, 0.4);
+      }
+    }
+
+    .ca-btn--icon-only {
+      padding: 0;
+      min-height: 0;
+      opacity: 0.8;
+
+      &:hover {
+        opacity: 1;
+      }
+    }
+  }
+}
+
+.caliber-editor-bubble-menu-animate-shake {
+  animation: 1s linear infinite alternate both shake;
+}
