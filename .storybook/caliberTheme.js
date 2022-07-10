@@ -1,11 +1,11 @@
 import { create } from "@storybook/theming";
-import caliberLogo from "./caliberLogo.svg";
+import caliberLogo from "./caliber.png";
 
 export default create({
   base: "dark",
 
-  colorPrimary: "#0048fd",
-  colorSecondary: "#0048fd",
+  colorPrimary: "#ea364a",
+  colorSecondary: "#ea364a",
 
   // UI
   appBg: "#121212",
