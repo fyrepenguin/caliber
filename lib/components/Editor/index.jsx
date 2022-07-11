@@ -8,10 +8,9 @@ import { stringifyObject, isNilOrEmpty } from "utils/common";
 import { DEFAULT_EDITOR_OPTIONS } from "./constants";
 import BubbleMenu from "./CustomExtensions/BubbleMenu";
 import CharacterCount from "./CustomExtensions/CharacterCount";
+import EmbedComponent from "./CustomExtensions/Embeds/EmbedComponent";
 import FixedMenu from "./CustomExtensions/FixedMenu";
 import ImageUploader from "./CustomExtensions/Image/Uploader";
-import MarkdownEditor from "./CustomExtensions/Markdown";
-import useMarkdownEditor from "./CustomExtensions/Markdown/useMarkdownEditor";
 import useCustomExtensions from "./CustomExtensions/useCustomExtensions";
 import {
   generateAddonOptions,
@@ -28,12 +27,16 @@ const Editor = (
     defaults = DEFAULT_EDITOR_OPTIONS,
     addons = [],
     addonCommands,
-    markdownMode = false,
     className,
     uploadEndpoint,
+    iframelyEndpoint,
     uploadConfig = {},
-    initialValue = "",
-    onChange = () => {},
+    embedConfig = {
+      Cookie:
+        "csrf_token_2d785ea2f6536900108362e9bfff73eef3a32be3921b3abc74b0a990093487c9=WdsYiez/zgzwK/YzNhzLZwUucmImocZjzqTLVnvJlhE=; ory_kratos_session=MTY1NzM2NTkzMnxEdi1CQkFFQ180SUFBUkFCRUFBQVJfLUNBQUVHYzNSeWFXNW5EQThBRFhObGMzTnBiMjVmZEc5clpXNEdjM1J5YVc1bkRDSUFJRXBUZFdGcGRUQlNPRlZ5Ym5WWVJVNXRiVTVMWW5SQ1VsVTBXRGd6ZWxkMHw7B48V8525ldAIfi2D9QeByKc-19KY_kM82pxBb4dCWw==",
+    },
+    initialValue = "<p></p>",
+    onChange = html => html,
     onFocus = () => {},
     onBlur = () => {},
     menuType = "fixed",
@@ -57,16 +60,16 @@ const Editor = (
   ref
 ) => {
   const [isImageUploadVisible, setImageUploadVisible] = useState(false);
+  const [isEmbedComponentVisible, setEmbedComponentVisible] = useState(false);
 
-  const isFixedMenuActive = !markdownMode && menuType === "fixed";
-  const isBubbleMenuActive = !markdownMode && menuType === "bubble";
-  const isSlashCommandsActive = !markdownMode && !hideSlashCommands;
+  const isFixedMenuActive = menuType === "fixed";
+  const isBubbleMenuActive = menuType === "bubble";
+  const isSlashCommandsActive = !hideSlashCommands;
   const isPlaceholderActive = getIsPlaceholderActive(placeholder);
   const showSlashCommandPlaceholder =
     !isPlaceholderActive && isSlashCommandsActive;
   const isUnsplashImageUploadActive = addons.includes("image-upload-unsplash");
-  const isCharacterCountActive =
-    !markdownMode && characterCountStrategy !== "hidden";
+  const isCharacterCountActive = characterCountStrategy !== "hidden";
 
   const addonOptions = generateAddonOptions(defaults, addons, {
     includeImageUpload: isUnsplashImageUploadActive,
@@ -121,28 +124,8 @@ const Editor = (
     onBlur,
   });
 
-  const markdownEditor = useMarkdownEditor({
-    content: initialValue,
-    onUpdate: ({ html }) => onChange(html),
-    onSubmit: ({ html }) => onSubmit && onSubmit(html),
-    markdownMode,
-  });
-
   /* Make editor object available to the parent */
-  React.useImperativeHandle(ref, () => ({
-    editor: markdownMode ? markdownEditor : editor,
-  }));
-
-  useEffect(() => {
-    if (!editor) return;
-    const nextContent = markdownMode
-      ? editor.getHTML()
-      : markdownEditor.getHTML();
-    const nextContentUpdater = markdownMode
-      ? markdownEditor.commands.setContent
-      : editor.commands.setContent;
-    nextContentUpdater(nextContent);
-  }, [markdownMode]);
+  React.useImperativeHandle(ref, () => ({ editor }));
 
   useEffect(() => {
     const isProduction = [process.env.RAILS_ENV, process.env.NODE_ENV].includes(
@@ -180,26 +163,14 @@ const Editor = (
         isUnsplashImageUploadActive={isUnsplashImageUploadActive}
         unsplashApiKey={editorSecrets?.unsplash}
       />
-      {markdownMode && (
-        <MarkdownEditor
-          editor={markdownEditor}
-          strategy={heightStrategy}
-          style={editorStyles}
-          limit={characterLimit}
-          className={editorClasses}
-          onFocus={onFocus}
-          onBlur={onBlur}
-          {...otherProps}
-        />
-      )}
-      <div
-        className={classNames({
-          "caliber-editor-content--hidden": markdownMode,
-        })}
-      >
-        <EditorContent editor={editor} {...otherProps} />
-      </div>
-
+      <EmbedComponent
+        isVisible={isEmbedComponentVisible}
+        setIsVisible={setEmbedComponentVisible}
+        editor={editor}
+        iframelyEndpoint={iframelyEndpoint}
+        embedConfig={embedConfig}
+      />
+      <EditorContent editor={editor} {...otherProps} />
       {isCharacterCountActive && (
         <CharacterCount
           count={editor?.storage.characterCount.characters()}

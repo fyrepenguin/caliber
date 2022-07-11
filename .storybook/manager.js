@@ -1,6 +1,6 @@
 import { addons } from "@storybook/addons";
 import caliberTheme from "./caliberTheme";
-import Favicon from "./public/favicon_light.ico";
+import Favicon from "./public/favicon.ico";
 
 addons.setConfig({
   theme: caliberTheme,

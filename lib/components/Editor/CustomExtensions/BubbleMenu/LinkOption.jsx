@@ -8,9 +8,15 @@ import { isNilOrEmpty } from "utils/common";
 
 const LinkOption = ({ editor, handleClose, handleAnimateInvalidLink }) => {
   const [link, setLink] = useState("");
+  const [target, setTarget] = useState(true);
 
   useEffect(() => {
     setLink(editor.getAttributes("link").href || "");
+    setTarget(
+      editor.getAttributes("link").target
+        ? editor.getAttributes("link").target === "__blank"
+        : true
+    );
   }, []);
 
   const handleKeyDown = event => {
@@ -23,7 +29,11 @@ const LinkOption = ({ editor, handleClose, handleAnimateInvalidLink }) => {
 
   const handleSubmit = () => {
     if (UrlRegExp.test(link)) {
-      editor.chain().focus().setLink({ href: link }).run();
+      editor
+        .chain()
+        .focus()
+        .setLink({ href: link, target: target ? "__blank" : "__self" })
+        .run();
       handleClose();
     } else if (isNilOrEmpty(link)) {
       editor.chain().focus().unsetLink().run();
@@ -60,6 +70,15 @@ const LinkOption = ({ editor, handleClose, handleAnimateInvalidLink }) => {
         onClick={handleReset}
         data-cy="caliber-editor-link-cancel-button"
       />
+      <label htmlFor="target">
+        <input
+          type="checkbox"
+          id="target"
+          checked={target}
+          onChange={() => setTarget(!target)}
+        />{" "}
+        Open in new tab
+      </label>
     </div>
   );
 };

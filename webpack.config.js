@@ -41,7 +41,7 @@ module.exports = [
     output: {
       path: `${__dirname}/build`,
       filename: "index.js",
-      library: "caliber-editor",
+      library: "caliber",
       libraryTarget: "umd",
     },
     plugins: [new PeerDepsExternalsPlugin()],

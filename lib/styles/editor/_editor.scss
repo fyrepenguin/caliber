@@ -13,6 +13,11 @@
   padding: 12px;
   color: $caliber-ui-gray-800;
 
+  p {
+    line-height: $caliber-ui-leading-relaxed;
+    margin-bottom: 16px;
+  }
+
   &:focus {
     outline: none;
   }

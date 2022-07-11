@@ -16,6 +16,7 @@ const ImageEditorModal = ({ editor, isOpen, onClose }) => {
             onClose={onClose}
             url={node?.attrs.src}
             alt={node?.attrs.alt}
+            caption={node?.attrs.caption}
           />
         </div>
       </div>
