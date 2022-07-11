@@ -3,11 +3,16 @@ import React, { useState } from "react";
 import Button from "components/Common/Button";
 import Input from "components/Common/Input";
 
-const ImageEditor = ({ url, editor, onClose, alt }) => {
+const ImageEditor = ({ url, editor, onClose, alt, caption }) => {
   const [altText, setAltText] = useState(alt || "");
+  const [captionText, setCaptionText] = useState(caption || "");
 
   const handleSubmit = () => {
-    editor.chain().focus().setImage({ src: url, alt: altText }).run();
+    editor
+      .chain()
+      .focus()
+      .setImage({ src: url, alt: altText, caption: captionText })
+      .run();
     onClose();
   };
 
@@ -18,6 +23,12 @@ const ImageEditor = ({ url, editor, onClose, alt }) => {
   return (
     <div className="caliber-editor-image-editor" onKeyDown={handleKeyDown}>
       <img src={url} />
+      <Input
+        value={captionText}
+        onChange={e => setCaptionText(e.target.value)}
+        placeholder="Caption the Image or add attribution"
+        label="Caption"
+      />
       <Input
         value={altText}
         onChange={e => setAltText(e.target.value)}

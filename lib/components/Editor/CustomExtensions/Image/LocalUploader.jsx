@@ -1,8 +1,10 @@
 import React, { useState } from "react";
 
+import AwsS3 from "@uppy/aws-s3";
 import Uppy from "@uppy/core";
 import { DragDrop, useUppy } from "@uppy/react";
-import XHRUpload from "@uppy/xhr-upload";
+import Url from "@uppy/url";
+//import XHRUpload from "@uppy/xhr-upload";
 
 import {
   DEFAULT_UPPY_CONFIG,
@@ -46,9 +48,14 @@ const LocalUploader = ({
         return true;
       },
     })
-      .use(XHRUpload, { endpoint, ...UPPY_UPLOAD_CONFIG })
+      .use(AwsS3, {
+        companionUrl: endpoint,
+        ...UPPY_UPLOAD_CONFIG.awsS3,
+      })
+      .use(Url, { companionUrl: endpoint, ...UPPY_UPLOAD_CONFIG.url })
+      //  .use(XHRUpload, { endpoint, ...UPPY_UPLOAD_CONFIG })
       .on("upload", () => setIsUploading(true))
-      .on("upload-success", (_, response) => onSuccess(response.body.imageURL))
+      .on("upload-success", (_, response) => onSuccess(response.uploadURL))
       .on("cancel-all", () => setIsUploading(false))
       .on("complete", () => setIsUploading(false))
   );

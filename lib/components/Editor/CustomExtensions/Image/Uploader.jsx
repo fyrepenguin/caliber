@@ -27,6 +27,13 @@ const ImageUpload = ({
   };
 
   const tab = {
+    gallery: () => (
+      <URLForm
+        onSubmit={handleUrlFormSubmit}
+        buttonLabel="Upload Image"
+        placeholder="Paste the image link"
+      />
+    ),
     local: () => (
       <LocalUploader
         endpoint={imageUploadUrl}

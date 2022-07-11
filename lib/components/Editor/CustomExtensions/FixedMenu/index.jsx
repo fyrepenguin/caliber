@@ -12,6 +12,9 @@ import {
   RiCodeSSlashFill,
   RiListUnordered,
   RiListOrdered,
+  RiAlignRight,
+  RiAlignLeft,
+  RiAlignCenter,
   RiImage2Line,
   RiDoubleQuotesL,
 } from "react-icons/ri";
@@ -39,7 +42,7 @@ const FixedMenu = ({
   const selectedNode = editor && editor.view.state.selection.node;
   const isImageNodeSelected =
     selectedNode && selectedNode.type.name === "image";
-
+  const isTextAlignActive = selectedNode && selectedNode.type.name === "text";
   if (!editor) {
     return null;
   }
@@ -146,6 +149,43 @@ const FixedMenu = ({
           onChange={color => editor.chain().focus().setColor(color).run()}
         />
       )}
+      {isTextAlignActive && (
+        <div className="caliber-editor-fixed-menu-align-options">
+          <MenuButton
+            icon={RiAlignLeft}
+            iconActive={editor.isActive("align", "left")}
+            onClick={() => editor.chain().focus().setAlign("left").run()}
+            tooltipProps={{
+              content: "Left",
+              position: "bottom",
+              delay: [500],
+            }}
+            data-cy={`caliber-editor-fixed-menu-align-left-option`}
+          />
+          <MenuButton
+            icon={RiAlignCenter}
+            iconActive={editor.isActive("align", "center")}
+            onClick={() => editor.chain().focus().setAlign("center").run()}
+            tooltipProps={{
+              content: "Center",
+              position: "bottom",
+              delay: [500],
+            }}
+            data-cy={`caliber-editor-fixed-menu-align-center-option`}
+          />
+          <MenuButton
+            icon={RiAlignRight}
+            iconActive={editor.isActive("align", "right")}
+            onClick={() => editor.chain().focus().setAlign("right").run()}
+            tooltipProps={{
+              content: "Right",
+              position: "bottom",
+              delay: [500],
+            }}
+            data-cy={`caliber-editor-fixed-menu-align-right-option`}
+          />
+        </div>
+      )}
       {isEmojiActive && <EmojiOption editor={editor} />}
       {isLinkActive && <LinkOption editor={editor} />}
       {blockStyleOptions.map(renderOptionButton)}
@@ -188,6 +228,7 @@ const FixedMenu = ({
               onClose={() => setIsImageEditorModalOpen(false)}
               url={selectedNode?.attrs.src}
               alt={selectedNode?.attrs.alt}
+              caption={selectedNode?.attrs.caption}
             />
           </div>
         </div>
