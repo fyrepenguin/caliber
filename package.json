@@ -1,6 +1,6 @@
 {
   "name": "@fyrepenguin/caliber",
-  "version": "0.0.3",
+  "version": "0.0.4",
   "main": "./build/index.js",
   "description": "Caliber is the Editor based on tiptap",
   "keywords": [
