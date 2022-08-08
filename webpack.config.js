@@ -7,7 +7,7 @@ const PeerDepsExternalsPlugin = require("peer-deps-externals-webpack-plugin");
 module.exports = [
   {
     externals: {
-      react: "React",
+      react: "react",
     },
     entry: "./lib/index.js",
     module: {
